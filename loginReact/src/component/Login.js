@@ -11,8 +11,22 @@ function Login (){
   const [contrasenna, setContrasenna] = useState('');
   const [confirmaciConcontrasenna, setConfirmaciConcontrasenna] = useState('');
   const [alerta, setAlerta] = useState(false);
+  const [alertaLogin, setalertaLogin] = useState(false);
 
   function loginUsuario(){
+    setAlerta(false);
+    setalertaLogin(false);
+
+    if(correo === "david@gmailcom" &&
+      contrasenna === "123456"){
+        setalertaLogin(true);
+      
+    }else{
+      setAlerta(true);
+      console.log('Usuario No registrado');
+      
+    }
+  
 
   }
   return (
@@ -49,7 +63,14 @@ function Login (){
           aria-describedby="inputGroup-pass-usuario"
         />
       </InputGroup> 
-
+      {
+        (alerta)? <Alert key='danger' variant='danger'>
+          La constraña no coincide </Alert> : ''
+        }
+          {
+        (alertaLogin)? <Alert key='success' variant='success'>
+          Usuario autenticado </Alert> : ''
+        }
 
         <Button id= "card-registrarse-boton" 
         variant="primary" type="submit" onClick={loginUsuario}>Iniciar Sesion</Button>
