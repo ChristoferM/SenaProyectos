@@ -6,8 +6,10 @@ package pizzeriaproject.modelos;
 
 
 public class CarritoCompras {
+    private Integer idCarritoCompras;
     private Integer codigo;
     private String nombre;
+    private String detalle;
     private Integer costoUnd;
     private Integer costoTotal;
     private String metodoPago;
