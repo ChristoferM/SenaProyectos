@@ -15,11 +15,11 @@ public class PizerriaProjectSolution {
 
     /**
      * @param args the command line arguments
-     */
+    
     public static void main(String[] args) throws SQLException {
         CarritoComprasJDBC jd = new CarritoComprasJDBC();
         
         jd.obtenerDatosCarrito();
-    }
+    }*/
     
 }

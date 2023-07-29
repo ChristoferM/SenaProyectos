@@ -48,33 +48,25 @@ public class VistaCompras extends javax.swing.JPanel {
         System.out.println(this.listaProductosPendiente.get(0).getCostoUnd().toString());
         System.out.println(this.listaProductosPendiente.get(0).getCostoTotal().toString());
         System.out.println(this.listaProductosPendiente.get(0).getMetodoPago());
+        
         if (!this.listaProductosPendiente.isEmpty()) {
             Object[] datos = new Object[tablaCarritoComprasModel.getColumnCount()];
             // {"idProducto", "nombre", "costo Uni","Total"};
-            System.out.println("-------");
-            System.out.println("FOR");
-            for (CarritoCompras productos : this.listaProductosPendiente) {
-                datos[0] = productos.getCodigo();
-                datos[1] = productos.getNombre();
-                datos[2] = productos.getNombre();
-                datos[3] = productos.getCostoUnd();
-                datos[4] = productos.getCostoTotal();
+            
+            datos[0] = this.listaProductosPendiente.get(0).getCodigo().toString();
+            datos[1] = this.listaProductosPendiente.get(0).getNombre();
+            datos[2] = this.listaProductosPendiente.get(0).getCostoUnd().toString();
+            datos[3] = this.listaProductosPendiente.get(0).getCostoTotal().toString();
+            datos[4] = "Efectivo";
+            
+            tablaCarritoComprasModel.addRow(datos);
 
-                System.out.println(productos.getCodigo().toString()
-                );
-                System.out.println(productos.getNombre());
-                System.out.println(productos.getCostoUnd().toString());
-                System.out.println(productos.getCostoTotal().toString());
-                System.out.println(productos.getMetodoPago());
-                System.out.println("agregando data");
-                tablaProductosModel.addRow(datos);
-            }
-            System.out.println("-------");
             jTable2.setModel(tablaCarritoComprasModel);
+            System.out.println("Se agraga a tabla");
         } else {
             System.out.println("NO HAY DATOS");
         }
-
+        System.out.println("Fin");
     }
 
     private void mostrarDatos() {
@@ -149,7 +141,8 @@ public class VistaCompras extends javax.swing.JPanel {
         String[] titulosTabla = {"id", "nombre", "Tipo Categoria"};
         tablaProductosModel.setColumnIdentifiers(titulosTabla);
         jTableProductos.setModel(tablaProductosModel);
-        String[] titulosTablaCarrito = {"idProducto", "nombre", "costo Uni", "Total"};
+        
+        String[] titulosTablaCarrito = {"idProducto", "nombre", "costo Uni", "Total","MetodoPago"};
         tablaCarritoComprasModel.setColumnIdentifiers(titulosTablaCarrito);
         jTable2.setModel(tablaCarritoComprasModel);
 
@@ -197,7 +190,6 @@ public class VistaCompras extends javax.swing.JPanel {
         JTextValor = new javax.swing.JTextField();
 
         btnBuscarProductos.setText("Filtrar");
-        btnBuscarProductos.setActionCommand("Filtrar");
         btnBuscarProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarProductosActionPerformed(evt);
@@ -240,6 +232,11 @@ public class VistaCompras extends javax.swing.JPanel {
         jScrollPane2.setViewportView(jTable2);
 
         jButton2.setText("Comprar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Agregar Producto");
         jButton1.setActionCommand("Agregar compra");
@@ -396,6 +393,11 @@ public class VistaCompras extends javax.swing.JPanel {
     private void JTextValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTextValorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_JTextValorActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        // TODO:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
