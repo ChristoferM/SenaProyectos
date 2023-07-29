@@ -23,10 +23,10 @@ function Login (){
       
     }else{
       setAlerta(true);
-      console.log('Usuario No registrado');
+      console.log('Usuario No valido');
       
     }
-  
+
 
   }
   return (
@@ -65,7 +65,7 @@ function Login (){
       </InputGroup> 
       {
         (alerta)? <Alert key='danger' variant='danger'>
-          La constraña no coincide </Alert> : ''
+          Usuario no valido</Alert> : ''
         }
           {
         (alertaLogin)? <Alert key='success' variant='success'>
