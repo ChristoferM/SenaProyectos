@@ -4,12 +4,13 @@
  */
 package pizzeriaproject.modelos;
 
-
 public class CarritoCompras {
+
     private Integer idCarritoCompras;
     private Integer codigo;
     private String nombre;
     private String detalle;
+    private Integer cantidad;
     private Integer costoUnd;
     private Integer costoTotal;
     private String metodoPago;
@@ -18,24 +19,47 @@ public class CarritoCompras {
     public CarritoCompras() {
     }
 
+    public Integer getIdCarritoCompras() {
+        return idCarritoCompras;
+    }
+
+    public void setIdCarritoCompras(Integer idCarritoCompras) {
+        this.idCarritoCompras = idCarritoCompras;
+    }
+
+    public String getDetalle() {
+        return detalle;
+    }
+
+    public void setDetalle(String detalle) {
+        this.detalle = detalle;
+    }
+
+    public Integer getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
+    }
+
     //metodos
-    public void agregarProducto(){
-       
-    }  
-    
-    public void retirarProducto(){
-        
+    public void agregarProducto() {
+
     }
-    
-    public void confirmar(){
-        
-    }    
-    
-    public void cancelar(){
-        
+
+    public void retirarProducto() {
+
     }
-    
-    
+
+    public void confirmar() {
+
+    }
+
+    public void cancelar() {
+
+    }
+
     //Get
     public Integer getCodigo() {
         return codigo;
@@ -77,10 +101,5 @@ public class CarritoCompras {
     public void setMetodoPago(String metodoPago) {
         this.metodoPago = metodoPago;
     }
-    
-    
-    
-    
-   
-    
+
 }

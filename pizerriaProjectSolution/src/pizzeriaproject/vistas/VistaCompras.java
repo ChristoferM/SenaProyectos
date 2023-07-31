@@ -42,22 +42,19 @@ public class VistaCompras extends javax.swing.JPanel {
     }
 
     private void setTablaProductosCarritoCompras() {
-        System.out.println("-------");
-        System.out.println(this.listaProductosPendiente.get(0).getCodigo().toString());
-        System.out.println(this.listaProductosPendiente.get(0).getNombre());
-        System.out.println(this.listaProductosPendiente.get(0).getCostoUnd().toString());
-        System.out.println(this.listaProductosPendiente.get(0).getCostoTotal().toString());
-        System.out.println(this.listaProductosPendiente.get(0).getMetodoPago());
         
+        System.out.println("Se agregaran datos a la tabla");
         if (!this.listaProductosPendiente.isEmpty()) {
             Object[] datos = new Object[tablaCarritoComprasModel.getColumnCount()];
             // {"idProducto", "nombre", "costo Uni","Total"};
-            
+            System.out.println("pizzeriaproject.vistas.VistaCompras.setTablaProductosCarritoCompras()");
             datos[0] = this.listaProductosPendiente.get(0).getCodigo().toString();
             datos[1] = this.listaProductosPendiente.get(0).getNombre();
             datos[2] = this.listaProductosPendiente.get(0).getCostoUnd().toString();
-            datos[3] = this.listaProductosPendiente.get(0).getCostoTotal().toString();
-            datos[4] = "Efectivo";
+            datos[3] = this.JTextCantidad.getText();
+            datos[4] = this.listaProductosPendiente.get(0).getCostoTotal().toString();
+            datos[5] = "Efectivo";
+            System.out.println("aca 3");
             
             tablaCarritoComprasModel.addRow(datos);
 
@@ -66,7 +63,7 @@ public class VistaCompras extends javax.swing.JPanel {
         } else {
             System.out.println("NO HAY DATOS");
         }
-        System.out.println("Fin");
+        System.out.println("Se termino de  agregar datos");
     }
 
     private void mostrarDatos() {
@@ -142,7 +139,7 @@ public class VistaCompras extends javax.swing.JPanel {
         tablaProductosModel.setColumnIdentifiers(titulosTabla);
         jTableProductos.setModel(tablaProductosModel);
         
-        String[] titulosTablaCarrito = {"idProducto", "nombre", "costo Uni", "Total","MetodoPago"};
+        String[] titulosTablaCarrito = {"idProducto", "nombre", "costo Uni","Cantidad", "Total","MetodoPago"};
         tablaCarritoComprasModel.setColumnIdentifiers(titulosTablaCarrito);
         jTable2.setModel(tablaCarritoComprasModel);
 
@@ -150,17 +147,35 @@ public class VistaCompras extends javax.swing.JPanel {
 
     private void agregarCompra() {
 
+        System.out.println("metodo de agregar compra");
         Double valorTotal = this.cantidad * this.valor;
 
         this.productoSeleccionado.setCostoUnd(this.valor.intValue());
         this.productoSeleccionado.setCostoTotal(valorTotal.intValue());
+        this.productoSeleccionado.setCantidad(Integer.parseInt(this.JTextCantidad.getText()));
         this.listaProductosPendiente = new ArrayList<>();
         this.listaProductosPendiente.add(this.productoSeleccionado);
+        System.out.println("Se agregaran datos al modelo de la tabla");
         this.setTablaProductosCarritoCompras();
         JTextCantidad.setText("");
         JTextValor.setText("");
         this.cantidad = 0;
         this.valor = 0.0;
+    }
+    
+    public void realizarTrasaccion(){
+        
+        for (CarritoCompras compra: listaProductosPendiente){
+            this.conexionCarritoJDBC.crearDatosCarrito(
+                    compra.getCodigo(),
+                    compra.getCantidad().toString() ,
+                    0,
+                    compra.getMetodoPago(),
+                    compra.getCostoTotal(), 
+                    compra.getCostoUnd());
+        }
+        this.listaProductosPendiente  = new ArrayList<>();       
+        
     }
 
     /**
@@ -372,11 +387,11 @@ public class VistaCompras extends javax.swing.JPanel {
 
             Integer cantidadProducto = Integer.parseInt(JTextCantidad.getText().toString());
             Double valorProducto = Double.parseDouble(JTextValor.getText().toString());
-            System.out.println("btn");
+            
             if (cantidadProducto > 0 && valorProducto > 0.0) {
-                System.out.println("btnif");
                 this.cantidad = cantidadProducto;
                 this.valor = valorProducto;
+                System.out.println("Agregar productos");
                 this.agregarCompra();
                 jLabelAlerta.setText("");
             } else {
@@ -395,8 +410,7 @@ public class VistaCompras extends javax.swing.JPanel {
     }//GEN-LAST:event_JTextValorActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
-        // TODO:
+        this.realizarTrasaccion();
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

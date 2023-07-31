@@ -54,6 +54,9 @@ public class CarritoComprasJDBC {
     
     public void crearDatosCarrito(Integer idProducto, String detalle, Integer cantidadVenta, String metodoPago, Integer costoTotal, Integer costoUnidad){
         try {
+            if (metodoPago.equals("Efectivo")){
+                metodoPago = "efectivo";
+            }
             // Establecer la conexión con la base de datos
             Connection connection = DriverManager.getConnection(carritoConexion.url,
                     carritoConexion.usuario, carritoConexion.contrasena);

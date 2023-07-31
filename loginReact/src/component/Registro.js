@@ -11,12 +11,16 @@ const Registro = () => {
   const [contrasenna, setContrasenna] = useState('');
   const [confirmaciConcontrasenna, setConfirmaciConcontrasenna] = useState('');
   const [alerta, setAlerta] = useState(false)
+  const [alertaLogin , setalertaLogin]= useState(false);
+  
 
   function registrarUsuario(){
     if(contrasenna !== confirmaciConcontrasenna){
       setAlerta(true);
+      setalertaLogin(false);
     }else{
-      setAlerta(false);
+      setAlerta(false)
+      setalertaLogin(true)
     }
   }
   
@@ -83,6 +87,10 @@ const Registro = () => {
       {
         (alerta)? <Alert key='danger' variant='danger'>
           La constraña no coincide </Alert> : ''
+        }
+        {
+         (alertaLogin)? <Alert key='success' variant='success'>
+          Usuario autenticado </Alert> : ''
         }
         <Button id= "card-registrarse-boton" 
         variant="primary" type="submit" onClick={registrarUsuario}>Registrarse</Button>
